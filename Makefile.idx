@@ -1,0 +1,23 @@
+.PHONY: clean tags cscope
+
+FIND_PATTERN = -name .git -prune -o \
+	       -name .svn -prune -o \
+	       -type f -print
+
+default: tags cscope
+
+tags:
+	@rm -f tags
+	@echo "Create tags file ..."
+	@find . $(FIND_PATTERN) | xargs ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q 
+
+cscope:
+	@rm -f cscope.files cscope.out cscope.in.out cscope.po.out
+	@find . $(FIND_PATTERN) > cscope.files
+	@echo "Create cscope files ..."
+	@cscope -Rbq
+
+clean:
+	@echo "Deleting ctags & cscope files ..."
+	@rm -f tags cscope.* 
+
