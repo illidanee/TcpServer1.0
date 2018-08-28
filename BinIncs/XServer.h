@@ -16,8 +16,11 @@ public:
 	XServer();
 	virtual ~XServer();
 
-	virtual void Init(XIGlobalEvent* pGlobalEventObj, int id);
-	virtual void Done();
+	void Init(XIGlobalEvent* pGlobalEventObj, int id);
+	void Done();
+
+    virtual int VInit();
+    virtual int VDone();
 
 	void Start();
 	void Stop();
@@ -31,13 +34,14 @@ public:
 	void AddClient(const std::shared_ptr<XClient> pClient);
 	int GetClientNum();
 
+    virtual int VClientJoin(std::shared_ptr<XClient> pClient);
 protected:
 	void OnRun(XThread* pThread);
 
 	void UpdateFrameTimeDelta();
 	int CheckClientNum();
 	int CheckClientState();
-	virtual int DoNetEvent() = 0;
+	virtual int VDoNetEvent() = 0;
 
 	//void RecvMsg();
 	//void SendMsg();

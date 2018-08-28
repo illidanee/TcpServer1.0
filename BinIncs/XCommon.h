@@ -19,6 +19,7 @@
 
 #define _XMARIADB_CONNECT_NUM_ 1000				//数据库连接池数
 
+#define _MAX_SOCKET_SIZE_ 1000000               //Epoll模式下可以较大，Select模式下等于FD_SETSIZE
 //系统相关宏定义
 #ifdef _WIN32
 	#define FD_SETSIZE 10240

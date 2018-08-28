@@ -1,6 +1,8 @@
 ﻿#ifndef __XIGLOBALEVENT_H__
 #define __XIGLOBALEVENT_H__
 
+#include "XCommon.h"
+
 //全局事件接口。
 struct MsgHeader;
 class XClient;

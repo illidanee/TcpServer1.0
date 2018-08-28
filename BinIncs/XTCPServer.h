@@ -5,7 +5,8 @@
 #include "XConfig.h"
 #include "XIGlobalEvent.h"
 #include "XNet.h"
-#include "XSelectServer.h"
+//#include "XSelectServer.h"
+#include "XEpollServer.h"
 #include "XClient.h"
 #include "XThread.h"
 #include <atomic>
@@ -53,7 +54,6 @@ protected:
 	std::vector<std::shared_ptr<XServer>> _AllServers;			//服务器信息
 
 	XThread _Thread;											//任务线程
-	XFdSet _FdRead;												
 //统计属性
 protected:
 	XTimer _Timer;												//计时器
@@ -71,7 +71,7 @@ protected:
 
 	void Accept();
 
-	virtual void OnRun(XThread* pThread) = 0;
+	virtual void VOnRun(XThread* pThread) = 0;
 };
 
 

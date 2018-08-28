@@ -1,15 +1,5 @@
 ﻿#include "MyServer.h"
 
-MyServer::MyServer()
-{
-
-}
-
-MyServer::~MyServer()
-{
-
-}
-
 void MyServer::OnMsg(std::shared_ptr<XClient> pClient, MsgHeader* pMsgHeader)
 {
 	//处理客户端请求
