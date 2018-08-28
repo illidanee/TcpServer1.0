@@ -17,7 +17,7 @@
 #define _XCLIENT_RECV_BUFFER_SIZE_ 10240		//缓冲区接收大小
 #define _XCLIENT_SEND_BUFFER_SIZE_ 10240		//缓冲区发送大小
 
-#define _XMARIADB_CONNECT_NUM_ 9595				//数据库连接池数
+#define _XMARIADB_CONNECT_NUM_ 1000				//数据库连接池数
 
 //系统相关宏定义
 #ifdef _WIN32
@@ -68,8 +68,5 @@
 
 //协议头
 #include "MsgProtocol.h"
-
-//Fd_set
-#include "XFdSet.h"
 
 #endif

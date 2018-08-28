@@ -16,15 +16,14 @@ void XLog::SetFileName(const char* pFileName, const char* pMode)
 		log._File = nullptr;
 	}
 
-	//计算当前时间
-	std::chrono::time_point<std::chrono::system_clock> t = std::chrono::system_clock::now();
-	time_t tt = std::chrono::system_clock::to_time_t(t);
-	std::tm* ttt = std::localtime(&tt);
+	////计算当前时间
+	//std::chrono::time_point<std::chrono::system_clock> t = std::chrono::system_clock::now();
+	//time_t tt = std::chrono::system_clock::to_time_t(t);
+	//std::tm* ttt = std::localtime(&tt);
 
-	char file[1024] = {};
-	sprintf(file, "%s__[%04d-%02d-%02d_%02d-%02d-%02d]", pFileName, ttt->tm_year + 1900, ttt->tm_mon + 1, ttt->tm_mday, ttt->tm_hour, ttt->tm_min, ttt->tm_sec);
-
-	log._File = fopen(file, pMode);
+	//char file[1024] = {};
+	//sprintf(file, "%s__[%04d-%02d-%02d_%02d-%02d-%02d]", pFileName, ttt->tm_year + 1900, ttt->tm_mon + 1, ttt->tm_mday, ttt->tm_hour, ttt->tm_min, ttt->tm_sec);
+	log._File = fopen(pFileName, pMode);
 	
 	assert(log._File != nullptr);
 }

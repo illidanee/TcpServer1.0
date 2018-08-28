@@ -1,11 +1,11 @@
-﻿#ifndef __XSERVER_H__
-#define __XSERVER_H__
+﻿#ifndef __XTCPSERVER_H__
+#define __XTCPSERVER_H__
 
 #include "XCommon.h"
 #include "XConfig.h"
 #include "XIGlobalEvent.h"
 #include "XNet.h"
-#include "XServer.h"
+#include "XSelectServer.h"
 #include "XClient.h"
 #include "XThread.h"
 #include <atomic>
@@ -16,10 +16,11 @@ class XTCPServer : public XIGlobalEvent
 {
 public:
 	XTCPServer();
-	~XTCPServer();
+	virtual ~XTCPServer();
 
 	int Init();
 	int Done();
+
 	int Start();
 	int Stop();
 
@@ -36,7 +37,7 @@ protected:
 	virtual void OnNetMsgEnd(std::shared_ptr<XClient> pClient, MsgHeader* pMsgHeader);
 
 //配置属性
-private:
+protected:
 	const char* _IP;
 	short _Port;
 	int _LQN;
@@ -47,14 +48,14 @@ private:
 	int _ClientSendBufferSize;									//客户端发送缓冲区大小
 
 //主要属性
-private:
+protected:
 	SOCKET _Socket;												//服务器监听Socket
 	std::vector<std::shared_ptr<XServer>> _AllServers;			//服务器信息
 
 	XThread _Thread;											//任务线程
 	XFdSet _FdRead;												
 //统计属性
-private:
+protected:
 	XTimer _Timer;												//计时器
 	std::atomic_int _ClientNum;									//客户端计数器
 	std::atomic_int _RecvNum;									//recv()函数调用计数
@@ -62,7 +63,7 @@ private:
 	std::atomic_int _RecvMsgNum;								//接收数据包计数器
 	std::atomic_int _SendMsgNum;								//处理数据包计数器
 
-private:
+protected:
 	void Open();
 	void Bind(const char* ip, unsigned short port);
 	void Listen(int n);
@@ -70,7 +71,7 @@ private:
 
 	void Accept();
 
-	void OnRun(XThread* pThread);
+	virtual void OnRun(XThread* pThread) = 0;
 };
 
 
