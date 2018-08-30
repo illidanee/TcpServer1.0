@@ -2,7 +2,7 @@
 
 XTCPServer::XTCPServer()
 	:
-	//_Socket(INVALID_SOCKE),
+	_Socket(INVALID_SOCKET),
 	_IP(_IP_),
 	_Port(_PORT_),
 	_LQN(_LQN_),

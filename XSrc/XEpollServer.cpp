@@ -14,7 +14,7 @@ int XEpollServer::VDone()
 
 int XEpollServer::VClientJoin(std::shared_ptr<XClient> pClient)
 {
-    _Epoll.Ctl(pClient->GetSocket(), EPOLL_CTL_ADD, EPOLLIN, &pClient);
+    _Epoll.Ctl(pClient->GetSocket(), EPOLL_CTL_ADD, EPOLLIN, pClient.get());
     return 0;
 }
 
@@ -24,11 +24,11 @@ int XEpollServer::VDoNetEvent()
     {
         if (client.second->GetFlush())
         {
-            _Epoll.Ctl(client.second->GetSocket(), EPOLL_CTL_MOD, EPOLLIN | EPOLLOUT, &client.second);
+            _Epoll.Ctl(client.second->GetSocket(), EPOLL_CTL_MOD, EPOLLIN | EPOLLOUT, client.second.get());
         }
         else
         {
-            _Epoll.Ctl(client.second->GetSocket(), EPOLL_CTL_MOD, EPOLLIN, &client.second);
+            _Epoll.Ctl(client.second->GetSocket(), EPOLL_CTL_MOD, EPOLLIN, client.second.get());
         }
     }
 
@@ -46,14 +46,20 @@ int XEpollServer::VDoNetEvent()
     epoll_event* pEvents = _Epoll.GetEvents();
     for (int i = 0; i < nRet; ++i)
     {
-        std::shared_ptr<XClient> pClient = *(std::shared_ptr<XClient>*)pEvents[i].data.ptr;
+        XClient* pClient = (XClient*)pEvents[i].data.ptr;
+        if (pClient == nullptr)
+        {
+            XWarn("Epoll ptr is nullptr.\n");
+            continue;
+        }
+
         if (pEvents[i].events & EPOLLIN)
         {
             int nRet = pClient->RecvMsg();
             if (nRet != 0)
             {
                 if (_pGlobalEventObj)
-                    _pGlobalEventObj->OnClientLeave(pClient);
+                    _pGlobalEventObj->OnClientLeave(pClient->GetSharedPtr());
                 
                 auto iter = _AllClients.find(pClient->GetSocket());
                 if (iter != _AllClients.end())
@@ -69,7 +75,7 @@ int XEpollServer::VDoNetEvent()
             if (nRet < 0)
             {
                 if (_pGlobalEventObj)
-                    _pGlobalEventObj->OnClientLeave(pClient);
+                    _pGlobalEventObj->OnClientLeave(pClient->GetSharedPtr());
 
                 auto iter = _AllClients.find(pClient->GetSocket());
                 if (iter != _AllClients.end())
@@ -79,5 +85,5 @@ int XEpollServer::VDoNetEvent()
     }
     
 
-   return 0;
+   return nRet;
 }

@@ -1,5 +1,15 @@
 ﻿#include "XTCPEpollServer.h"
 
+XTCPEpollServer::XTCPEpollServer()
+{
+    
+}
+
+XTCPEpollServer::~XTCPEpollServer()
+{
+    
+}
+
 void XTCPEpollServer::VOnRun(XThread* pThread)
 {
 	XInfo("---------------------------------------------------------------------------------------------------- XServer:OnRun() Begin\n");
@@ -29,7 +39,6 @@ void XTCPEpollServer::VOnRun(XThread* pThread)
                Accept();    
             }
         }
-		Accept();
 	}
     _Epoll.Destroy();
 

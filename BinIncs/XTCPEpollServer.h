@@ -8,6 +8,9 @@
 class XTCPEpollServer : public XTCPServer
 {
 public:
+    XTCPEpollServer();
+    ~XTCPEpollServer();
+
 	virtual void VOnRun(XThread* pThread);
 
 private:

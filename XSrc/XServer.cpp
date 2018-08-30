@@ -244,8 +244,8 @@ int XServer::CheckClientState()
 		iter->second->CheckSendNum();
 
 		//立即发送
-		if (iter->second->HasData())
-			iter->second->Flush();
+		//if (iter->second->HasData())
+		//	iter->second->Flush();
 
 		++iter;
 	}
