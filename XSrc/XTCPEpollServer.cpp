@@ -12,7 +12,7 @@ XTCPEpollServer::~XTCPEpollServer()
 
 void XTCPEpollServer::VOnRun(XThread* pThread)
 {
-	XInfo("---------------------------------------------------------------------------------------------------- XServer:OnRun() Begin\n");
+	XInfo("-------------------------------------------------------------------------------- XTCPServer:OnRun() Begin\n");
 
     _Epoll.Create(1);
     _Epoll.Ctl(_Socket, EPOLL_CTL_ADD, EPOLLIN, this); 
@@ -42,7 +42,7 @@ void XTCPEpollServer::VOnRun(XThread* pThread)
 	}
     _Epoll.Destroy();
 
-	XInfo("---------------------------------------------------------------------------------------------------- XServer:OnRun() End\n");
+	XInfo("-------------------------------------------------------------------------------- XTCPServer:OnRun() End\n");
 }
 
 

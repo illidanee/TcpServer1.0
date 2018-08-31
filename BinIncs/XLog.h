@@ -149,14 +149,4 @@ private:
 #define XError(...) XLog::Error(__VA_ARGS__)
 #endif
 
-#ifndef XDebug
-#ifdef _DEBUG
-#define XDebug(...) XLog::XDebug(__VA_ARGS__)
-#else
-#define XDebug(...)
-#endif
-#endif
-
-
-
 #endif
