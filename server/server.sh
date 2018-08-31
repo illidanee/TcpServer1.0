@@ -3,8 +3,7 @@ cd `dirname $0`
 
 ARGS="IP=Any" 
 ARGS=$ARGS" Port=9090"
-ARGS=$ARGS" LQN=1000"
-ARGS=$ARGS" LQN=1000"
+ARGS=$ARGS" LQN=10000"
 ARGS=$ARGS" ServerThreadSize=2"
 ARGS=$ARGS" ClientHeartTime=6000000"
 ARGS=$ARGS" ClientSendTime=200000"

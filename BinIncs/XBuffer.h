@@ -3,7 +3,7 @@
 
 #include "XCommon.h"
 
-class XBuffer : public XObject<20480, XBuffer>
+class XBuffer : public XObject<204800, XBuffer>
 {
 public:
 	XBuffer(int nSize);

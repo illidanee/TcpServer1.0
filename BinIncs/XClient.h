@@ -8,7 +8,7 @@
 #include "XByteStream.h"
 
 //客户端信息类
-class XClient : public XObject<10240, XClient>, public std::enable_shared_from_this<XClient>
+class XClient : public XObject<102400, XClient>, public std::enable_shared_from_this<XClient>
 {
 public:
 	XClient(XIGlobalEvent* pGlobalObj, XIServerEvent* pServerObj, SOCKET client, int nHeartTime = _XCLIENT_HEART_TIME_, int nSendTime = _XCLIENT_SEND_TIME_, int nRecvBufferSize = _XCLIENT_RECV_BUFFER_SIZE_, int nSendBufferSize = _XCLIENT_SEND_BUFFER_SIZE_);
