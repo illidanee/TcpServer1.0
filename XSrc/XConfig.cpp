@@ -54,22 +54,3 @@ int XConfig::GetIntArg(const char* key, int def)
 	return def;
 }
 
-XConfig::XConfig()
-{
-
-}
-
-XConfig::XConfig(const XConfig&)
-{
-
-}
-
-XConfig& XConfig::operator=(const XConfig&)
-{
-	return *this;
-}
-
-XConfig::~XConfig()
-{
-
-}

@@ -71,7 +71,7 @@ void XThread::OnWork()
 	if (_pEnd)
 		_pEnd(this);
 
-	_Run = false;
-
 	_Signal.Wake();
+
+	_Run = false;
 }

@@ -86,8 +86,9 @@ void XLog::Stop()
 		if (--_WaitNum < 0)
 		{
 			_CV.wait(lock, [this]()->bool {
-				return _WakeNum-- > 0;
+				return _WakeNum > 0;
 			});
+            --_WakeNum;
 		}
 	}
 }

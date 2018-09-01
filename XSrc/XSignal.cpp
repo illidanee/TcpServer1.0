@@ -15,7 +15,7 @@ void XSignal::Wait()
 		_CV.wait(lock, [this]()->bool { 
 			return _WakeNum > 0;
 		});
-		--_WakeNum;
+    	--_WakeNum;
 	}
 }
 

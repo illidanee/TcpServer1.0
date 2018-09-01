@@ -44,7 +44,6 @@ int XBuffer::Recv(SOCKET socket)
 	if (size == -1)
 	{
 		//Socket错误。
-		//XInfo("--%d \n", WSAGetLastError());
 		return -1;
 	}
 	else if (size == 0)
@@ -73,12 +72,17 @@ int XBuffer::Send(SOCKET socket)
 		//Socket错误。
 		return -1;
 	}
+    else if (size == 0)
+    {
+        //对端断开
+        return -2;
+    }
 
 	//正常发送。
 	_nOffset -= size;
 	if (_nOffset > 0)
 	{
-		memcpy(_pBuffer + size, _pBuffer, _nOffset);
+		memcpy(_pBuffer, _pBuffer + size, _nOffset);
 	}
 
 	return 0;

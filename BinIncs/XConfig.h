@@ -34,12 +34,6 @@ public:
 	int GetIntArg(const char* key, int def);
 
 private:
-	XConfig();
-	XConfig(const XConfig&);
-	XConfig& operator=(const XConfig&);
-	~XConfig();
-
-private:
 	std::string _Exe;
 	std::map<std::string, std::string> _Args;
 };
