@@ -293,6 +293,7 @@ void XMariaDBConnect::Init()
 	mysql_options(_pConnect, MYSQL_OPT_RECONNECT, &value);		//启用断线重连。
 	if (!mysql_real_connect(_pConnect, "127.0.0.1", "aoyi", "yang", "aoyi", 0, "/var/run/mysqld/mysqld.sock", 0))
 		show_error(_pConnect);
+	mysql_query(_pConnect, "set names utf8");
 }
 
 void XMariaDBConnect::Done()
