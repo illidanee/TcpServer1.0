@@ -16,6 +16,7 @@ XMariaDBConnect::~XMariaDBConnect()
 void XMariaDBConnect::Ping()
 {
 	mysql_ping(_pConnect); //启用断线重连。
+	mysql_query(_pConnect, "set names utf8");
 }
 
 int XMariaDBConnect::SearchStudentByUserName(const char* pUserName)

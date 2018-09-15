@@ -3,7 +3,8 @@
 export BUILD_ROOT = $(shell pwd)
 
 export GCC := g++
-export GCC_FLAG := -g -O0 -std=c++11
+#export GCC_FLAG := -g -O0 -std=c++11
+export GCC_FLAG := -std=c++11
 export GCC_INCS_DIR := -I/usr/local/include/mariadb
 export GCC_LIBS_DIR := -L/usr/local/lib/mariadb
 export GCC_LIBS := -pthread -lmariadb
