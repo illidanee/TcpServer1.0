@@ -65,7 +65,11 @@ private:
 	XBuffer _RecvBuffer;						//接收缓冲区对象
 	XBuffer _SendBuffer;						//发送缓冲区对象
 
+	bool _Kill;							//是否关闭
 public:
+	bool GetKill()	{ return _Kill; }
+	void SetKill(bool kill) { _Kill = kill; }
+
 	int _CurMsgID;								//当前消息ID
 };
 

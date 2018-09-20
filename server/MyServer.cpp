@@ -752,6 +752,7 @@ void MyServer::OnMsg(std::shared_ptr<XClient> pClient, MsgHeader* pMsgHeader)
 	break;
 	default:
 	{
+		pClient->SetKill(true);
 		XWarn("default Msg。");
 	}
 	}

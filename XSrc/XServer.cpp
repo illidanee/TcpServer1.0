@@ -224,6 +224,19 @@ int XServer::CheckClientState()
 	int ret = 0;
 	for (std::map<SOCKET, std::shared_ptr<XClient>>::iterator iter = _AllClients.begin(); iter != _AllClients.end(); )
 	{
+		//检查是否有kill状态的客户端
+		if (iter->second->GetKill())
+		{
+			if (_pGlobalEventObj)
+				_pGlobalEventObj->OnClientLeave(iter->second);
+
+			iter = _AllClients.erase(iter);
+			_ClientChange = true;
+
+			++ret;
+			continue;
+		}
+
 		//心跳检测。
 		if (iter->second->CheckHeartTime(_FrameTimeDelta))
 		{

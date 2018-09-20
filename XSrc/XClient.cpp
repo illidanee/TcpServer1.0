@@ -12,6 +12,7 @@ XClient::XClient(XIGlobalEvent* pGlobalObj, XIServerEvent* pServerObj, SOCKET cl
 	_bFlush(false),
 	_RecvBuffer(nRecvBufferSize),
 	_SendBuffer(nSendBufferSize),
+	_Kill(false),
 	_CurMsgID(0)
 {
 }
