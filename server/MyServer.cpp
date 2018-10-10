@@ -5,74 +5,74 @@ void MyServer::OnMsg(std::shared_ptr<XClient> pClient, MsgHeader* pMsgHeader)
 	//处理客户端请求
 	switch (pMsgHeader->_MsgType)
 	{
-	case MSG_ERROR:
-	{
-		// ...
-	}
-	break;
-	case MSG_HEART:
-	{
-		if (pClient->_CurMsgID != ((MsgHeart*)pMsgHeader)->_ID)
-		{
-			XWarn("************** Msg ID is not match。\n");
-		}
-		pClient->_CurMsgID++;
+	//case MSG_ERROR:
+	//{
+	//	// ...
+	//}
+	//break;
+	//case MSG_HEART:
+	//{
+	//	if (pClient->_CurMsgID != ((MsgHeart*)pMsgHeader)->_ID)
+	//	{
+	//		XWarn("************** Msg ID is not match。\n");
+	//	}
+	//	pClient->_CurMsgID++;
 
-		pClient->SendMsg(pMsgHeader);
-	}
-	break;
-	case MSG_BYTESTREAM:
-	{
-		//持久化消息，防止消息被释放后再任务线程使用。
-		char* pBuffer = new char[pMsgHeader->_MsgLength];
-		memcpy(pBuffer, pMsgHeader, pMsgHeader->_MsgLength);
+	//	pClient->SendMsg(pMsgHeader);
+	//}
+	//break;
+	//case MSG_BYTESTREAM:
+	//{
+	//	//持久化消息，防止消息被释放后再任务线程使用。
+	//	char* pBuffer = new char[pMsgHeader->_MsgLength];
+	//	memcpy(pBuffer, pMsgHeader, pMsgHeader->_MsgLength);
 
-		std::function<void()> pTask = [pClient, pBuffer]()
-		{
-			XRecvByteStream r((MsgHeader*)pBuffer);
+	//	std::function<void()> pTask = [pClient, pBuffer]()
+	//	{
+	//		XRecvByteStream r((MsgHeader*)pBuffer);
 
-			int32_t type = MSG_ERROR;
-			r.ReadInt32(type);
+	//		int32_t type = MSG_ERROR;
+	//		r.ReadInt32(type);
 
-			int8_t r1;
-			r.ReadInt8(r1);
-			int16_t r2;
-			r.ReadInt16(r2);
-			int32_t r3;
-			r.ReadInt32(r3);
-			int64_t r4;
-			r.ReadInt64(r4);
-			float r5;
-			r.ReadFloat(r5);
-			double r6;
-			r.ReadDouble(r6);
-			char r7[32] = {};
-			int len7 = r.ReadArray(r7, 32);
-			char r8[32] = {};
-			int len8 = r.ReadArray(r8, 32);
+	//		int8_t r1;
+	//		r.ReadInt8(r1);
+	//		int16_t r2;
+	//		r.ReadInt16(r2);
+	//		int32_t r3;
+	//		r.ReadInt32(r3);
+	//		int64_t r4;
+	//		r.ReadInt64(r4);
+	//		float r5;
+	//		r.ReadFloat(r5);
+	//		double r6;
+	//		r.ReadDouble(r6);
+	//		char r7[32] = {};
+	//		int len7 = r.ReadArray(r7, 32);
+	//		char r8[32] = {};
+	//		int len8 = r.ReadArray(r8, 32);
 
-			XSendByteStream s(1024);
-			s.WriteInt8(10);
-			s.WriteInt16(20);
-			s.WriteInt32(30);
-			s.WriteInt64(40);
-			s.WriteFloat(55.66f);
-			s.WriteDouble(77.88);
-			s.WriteArray(r7, len7);
-			s.WriteArray("Server", (int)strlen("Server"));
-			s.Finish(MSG_BYTESTREAM);
+	//		XSendByteStream s(1024);
+	//		s.WriteInt8(10);
+	//		s.WriteInt16(20);
+	//		s.WriteInt32(30);
+	//		s.WriteInt64(40);
+	//		s.WriteFloat(55.66f);
+	//		s.WriteDouble(77.88);
+	//		s.WriteArray(r7, len7);
+	//		s.WriteArray("Server", (int)strlen("Server"));
+	//		s.Finish(MSG_BYTESTREAM);
 
-			if (pClient->SendStream(&s) != 0)
-			{
-				XError("<Client=%d Send Buffer Full!!!\n", (int)pClient->GetSocket());
-			}
+	//		if (pClient->SendStream(&s) != 0)
+	//		{
+	//			XError("<Client=%d Send Buffer Full!!!\n", (int)pClient->GetSocket());
+	//		}
 
-			delete[] pBuffer;
-		};
+	//		delete[] pBuffer;
+	//	};
 
-		pClient->GetServerObj()->AddTask(pTask);
-	}
-	break;
+	//	pClient->GetServerObj()->AddTask(pTask);
+	//}
+	//break;
 	case MSG_ENROLL:
 	{
 		//持久化消息，防止消息被释放后再任务线程使用。
@@ -746,14 +746,14 @@ void MyServer::OnMsg(std::shared_ptr<XClient> pClient, MsgHeader* pMsgHeader)
 		pClient->GetServerObj()->AddTask(pTask);
 	}
 	break;
-	case MSG_BROADCAST:
-	{
-	}
-	break;
+	//case MSG_BROADCAST:
+	//{
+	//}
+	//break;
 	default:
 	{
 		pClient->SetKill(true);
-		XWarn("default Msg。");
+		XWarn("default Msg...\n");
 	}
 	}
 }
